@@ -1,5 +1,7 @@
 package com.example.microservices.order.client;
 
-public class InventoryClient {
+@FeignClient(value = "inventory, url = "http://localhost:8082)
+
+public interface InventoryClient {
     
 }

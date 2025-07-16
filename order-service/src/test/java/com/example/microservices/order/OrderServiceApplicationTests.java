@@ -9,7 +9,7 @@ import org.springframework.boot.test.web.server.LocalServerPort;
 import org.springframework.boot.testcontainers.service.connection.ServiceConnection;
 import org.springframework.cloud.contract.wiremock.AutoConfigureWireMock;
 import org.testcontainers.containers.MySQLContainer;
-import com.example.microservices.order.stub.InventoryClientStub;
+import com.example.microservices.order.stubs.InventoryClientStub;
 import static org.hamcrest.MatcherAssert.assertThat;
 
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -35,14 +35,14 @@ class OrderServiceApplicationTests {
     void shouldSubmitOrder() {
         String submitOrderJson = """
                 {
-                     "skuCode": "iPhone 16",
+                     "skuCode": "iPhone_16",
                      "price": 1000,
                      "quantity": 1
                 }
                 """;
 
         // Stub the inventory service response
-        InventoryClientStub.stubInventoryCall("iPhone 16", 1);
+        InventoryClientStub.stubInventoryCall("iPhone_16", 1);
 
         var responseBodyString = RestAssured.given()
                 .contentType("application/json")
